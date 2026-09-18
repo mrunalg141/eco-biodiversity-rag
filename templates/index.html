@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoIntel — Biodiversity Intelligence</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+<div class="app-shell">
+
+```
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-header">
+        <div class="brand">
+            <div class="brand-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                </svg>
+            </div>
+            <div>
+                <span class="brand-name">EcoIntel</span>
+                <span class="brand-subtitle">Biodiversity Intelligence</span>
+            </div>
+        </div>
+
+        <button id="sidebar-toggle" class="icon-btn" title="Toggle sidebar">
+            <svg width="18" height="18" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+
+    <button id="new-chat-btn" class="new-chat-btn">
+        <span class="plus-icon">+</span>
+        New Analysis
+    </button>
+
+    <div class="knowledge-status">
+        <span class="status-dot"></span>
+        <div>
+            <strong>Knowledge Base Active</strong>
+            <span>Scientific sources connected</span>
+        </div>
+    </div>
+
+    <div class="sidebar-section-label">Research Documents</div>
+
+    <div class="upload-area">
+        <label for="pdf-upload" class="upload-dropzone" id="upload-dropzone">
+            <div class="upload-icon-wrap">
+                <svg width="20" height="20" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+            </div>
+
+            <div class="upload-text">
+                <span class="upload-title" id="file-name-display">
+                    Add scientific report
+                </span>
+                <span class="upload-subtitle">
+                    PDF • Drag & drop or browse
+                </span>
+            </div>
+        </label>
+
+        <input type="file" id="pdf-upload" accept="application/pdf" hidden>
+
+        <button id="upload-btn" class="upload-submit-btn">
+            Add to knowledge base
+        </button>
+    </div>
+
+    <div id="upload-status" class="upload-status-text"></div>
+
+    <div class="sidebar-section-label category-label">
+        Environmental Dimensions
+    </div>
+
+    <div class="category-list">
+        <div class="category-item">
+            <span class="category-dot soil-dot"></span>
+            Soil Health
+        </div>
+        <div class="category-item">
+            <span class="category-dot climate-dot"></span>
+            Climate
+        </div>
+        <div class="category-item">
+            <span class="category-dot bio-dot"></span>
+            Biodiversity
+        </div>
+        <div class="category-item">
+            <span class="category-dot land-dot"></span>
+            Land Use
+        </div>
+        <div class="category-item">
+            <span class="category-dot impact-dot"></span>
+            Human Impact
+        </div>
+    </div>
+
+    <div class="sidebar-footer">
+        <div class="user-chip">
+            <div class="user-avatar">E</div>
+            <div class="user-info">
+                <span class="user-name">Environmental Session</span>
+                <span class="user-sub">Evidence-grounded analysis</span>
+            </div>
+        </div>
+    </div>
+
+</aside>
+
+
+<!-- MAIN PANEL -->
+<main class="main-panel">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+
+        <button id="mobile-sidebar-toggle"
+                class="icon-btn mobile-only"
+                title="Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <div class="topbar-info">
+            <span class="topbar-title">Biodiversity Intelligence</span>
+            <span class="topbar-status">
+                AI-assisted environmental reasoning
+            </span>
+        </div>
+
+        <div class="topbar-actions">
+            <span class="live-badge">
+                <span></span> RAG ACTIVE
+            </span>
+
+            <button id="clear-btn"
+                    class="icon-btn"
+                    title="Clear chat history">
+                <svg width="16" height="16" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- CHAT -->
+    <div id="chat-box" class="chat-box">
+
+        {% if messages %}
+
+            {% for msg in messages %}
+
+            <div class="message user">
+                <div class="message-label">YOU</div>
+                {{ msg.user_message }}
+            </div>
+
+            <div class="message bot">
+                <div class="message-label ai-label">
+                    <span class="ai-dot"></span>
+                    ECOINTEL
+                </div>
+                {{ msg.bot_reply }}
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+        <!-- EMPTY STATE -->
+        <div class="empty-state" id="empty-state">
+
+            <div class="hero-icon">
+                <svg width="42" height="42" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="1.5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                </svg>
+            </div>
+
+            <div class="hero-badge">
+                AI • RAG • BIODIVERSITY
+            </div>
+
+            <h1>Understand your ecosystem.</h1>
+
+            <p class="hero-description">
+                Connect soil, climate, land-use and biodiversity signals
+                to generate evidence-backed environmental recommendations.
+            </p>
+
+
+            <!-- METRIC CARDS -->
+            <div class="metric-grid">
+
+                <div class="metric-card">
+                    <div class="metric-icon soil-icon">S</div>
+                    <div>
+                        <strong>Soil</strong>
+                        <span>pH • SOC • Moisture</span>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon climate-icon">C</div>
+                    <div>
+                        <strong>Climate</strong>
+                        <span>Rainfall • Temperature</span>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon bio-icon">B</div>
+                    <div>
+                        <strong>Biodiversity</strong>
+                        <span>Species • Habitat</span>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon land-icon">L</div>
+                    <div>
+                        <strong>Land Use</strong>
+                        <span>Cover • Fragmentation</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- SUGGESTIONS -->
+            <div class="suggestions">
+
+                <div class="suggestion-heading">
+                    Start with an analysis
+                </div>
+
+                <div class="suggestion-row">
+
+                    <button class="suggestion-chip"
+                            data-text="Biodiversity is declining on my land. What should I check first?">
+                        <span>↗</span>
+                        Diagnose my land
+                    </button>
+
+                    <button class="suggestion-chip"
+                            data-text="Suggest an evidence-backed way to improve soil organic carbon">
+                        <span>✦</span>
+                        Get a recommendation
+                    </button>
+
+                    <button class="suggestion-chip"
+                            data-text="How are soil health and biodiversity connected?">
+                        <span>⌁</span>
+                        Explore a connection
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- INPUT -->
+    <div class="input-wrapper">
+
+        <div class="input-area">
+
+            <div class="input-prefix">
+                <span class="input-status-dot"></span>
+            </div>
+
+            <input type="text"
+                   id="user-input"
+                   placeholder="Describe your land, soil or climate conditions...">
+
+            <button id="send-btn">
+                <span>Analyze</span>
+                <svg width="16" height="16" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+
+        </div>
+
+        <div class="input-hint">
+            Grounded in your environmental knowledge base •
+            Ask about soil, climate, land use or biodiversity
+        </div>
+
+    </div>
+
+</main>
+```
+
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
